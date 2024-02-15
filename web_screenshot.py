@@ -5,6 +5,9 @@ from selenium.webdriver.chrome.options import Options
 import time
 import requests
 import os
+
+GOOGLE_CHROME_BIN='/app/.apt/usr/bin/google-chrome'
+CHROMEDRIVER_PATH='/app/.chromedriver/bin/chromedriver'
 client_id = "f9c070d7ce82119"
 def upload_to_imgur(image_path):
     headers = {"Authorization": f"Client-ID {client_id}"}
