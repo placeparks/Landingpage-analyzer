@@ -73,3 +73,4 @@ watchdog==4.0.0
 wsproto==1.2.0
 yarl==1.9.4
 zipp==3.17.0
+webdriver-manager==3.5.2
