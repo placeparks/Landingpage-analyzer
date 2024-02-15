@@ -24,15 +24,14 @@ def upload_to_imgur(image_path):
 
 
 def capture_web_page_image(url, file_path):
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
-
     chrome_options = Options()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--window-size=1920,1080")
     chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
     chrome_options.add_experimental_option("useAutomationExtension", False)
-    driver = webdriver.Chrome(options=chrome_options)
+
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
 
     stealth(
         driver,
@@ -44,7 +43,6 @@ def capture_web_page_image(url, file_path):
         fix_hairline=True,
     )
 
-    
     driver.get(url)
     time.sleep(4)  # Wait for the page to load
 
@@ -53,3 +51,4 @@ def capture_web_page_image(url, file_path):
     driver.save_screenshot(screenshot_path)
     driver.quit()
     return screenshot_path
+
