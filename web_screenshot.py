@@ -2,8 +2,11 @@ from selenium import webdriver
 from selenium_stealth import stealth
 from urllib.parse import urlparse
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 import time
 import requests
+import os
 
 client_id = "f9c070d7ce82119"
 def upload_to_imgur(image_path):
@@ -21,14 +24,14 @@ def upload_to_imgur(image_path):
         print(f"Other error occurred: {err}")  # Other errors
     return None
 
-
 def capture_web_page_image(url, file_path):
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--window-size=1920,1080")
     chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
     chrome_options.add_experimental_option("useAutomationExtension", False)
-    driver = webdriver.Chrome(options=chrome_options)
+
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
     stealth(
         driver,
@@ -40,7 +43,6 @@ def capture_web_page_image(url, file_path):
         fix_hairline=True,
     )
 
-    
     driver.get(url)
     time.sleep(4)  # Wait for the page to load
 
